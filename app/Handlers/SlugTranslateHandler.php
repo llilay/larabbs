@@ -15,7 +15,7 @@ class SlugTranslateHandler
         // 初始化配置信息
         $api = 'http://api.fanyi.baidu.com/api/trans/vip/translate?';
         $appid = config('services.baidu_translate.appid');
-        $key = config('sevices.badu_translate.key');
+        $key = config('services.baidu_translate.key');
         $salt = time();
 
         // 如果没有配置百度翻译, 自动使用兼容的拼音方案
