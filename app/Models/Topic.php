@@ -8,11 +8,19 @@ class Topic extends Model
         'title', 'body', 'category_id', 'excerpt', 'slug'
     ];
 
+    //一篇帖子下有多条回复
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    //一篇帖子属于一种分类
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    //一篇帖子只有一个作者
     public function user()
     {
         return $this->belongsTo(User::class);
