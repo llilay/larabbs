@@ -32,8 +32,6 @@ class VerificationCodesController extends Controller
             }
         }
 
-
-
         $key = 'verificationCode_'.str_random(15);
         $expiredAt = now()->addMinutes(10);
 
