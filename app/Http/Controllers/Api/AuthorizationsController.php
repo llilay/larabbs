@@ -10,6 +10,7 @@ use App\Http\Requests\Api\SocialAuthorizationRequest;
 
 class AuthorizationsController extends Controller
 {
+    // 手机号/邮箱登录
     public function store(AuthorizationRequest $request)
     {
         $username = $request->username;
@@ -27,6 +28,7 @@ class AuthorizationsController extends Controller
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
+    // 第三方登录
     public function socialStore($type, SocialAuthorizationRequest $request)
     {
         if (!in_array($type, ['weixin'])) {
