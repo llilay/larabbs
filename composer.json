@@ -10,6 +10,7 @@
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "~3.3",
         "fzaninotto/faker": "~1.4",
+        "gregwar/captcha": "^1.1",
         "guzzlehttp/guzzle": "~6.3",
         "hieu-le/active": "~3.5",
         "intervention/image": "^2.4",
