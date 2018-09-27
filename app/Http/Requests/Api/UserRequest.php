@@ -40,6 +40,7 @@ class UserRequest extends FormRequest
                     'email' => 'email',
                     'introduction' => 'max:80',
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,
+                    // images 表中id是否存在，type 是否为 avatar，用户id是否是当前登录的用户id
                 ];
                 break;
         }
