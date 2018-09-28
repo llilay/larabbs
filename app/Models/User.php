@@ -23,7 +23,6 @@ class User extends Authenticatable implements JWTSubject
         if ($this->id == Auth::id()) {
             return;
         }
-
         $this->increment('notification_count');
         $this->laravelNotify($instance);
     }

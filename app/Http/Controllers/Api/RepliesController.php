@@ -11,7 +11,7 @@ use App\Http\Requests\Api\ReplyRequest;
 class RepliesController extends Controller
 {
     /**
-     * 话题回复列表
+     * 发布话题的回复列表, 某个话题的回复列表
      *
      * @param Topic $topic
      * @return \Dingo\Api\Http\Response
@@ -23,6 +23,12 @@ class RepliesController extends Controller
         return $this->response->paginator($replies, new ReplyTransformer());
     }
 
+    /**
+     * 用户的回复其他话题的列表, 某个用户的回复列表
+     *
+     * @param User $user
+     * @return \Dingo\Api\Http\Response
+     */
     public function userIndex(User $user)
     {
         $replies = $user->replies()->paginate(20);

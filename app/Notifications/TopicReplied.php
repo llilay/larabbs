@@ -14,11 +14,6 @@ class TopicReplied extends Notification implements ShouldQueue
 
     public $reply;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
     public function __construct(Reply $reply)
     {
         // 注入回复实体，方便 toDatabase 方法中的使用
@@ -35,22 +30,6 @@ class TopicReplied extends Notification implements ShouldQueue
     {
         // 开启通知的频道
         return ['database', 'mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
-
-        return (new MailMessage)
-                    ->line('你的话题有新回复！')
-                    ->action('查看回复', $url)
-                    ->line('Thank you for using our application!');
     }
 
     public function toDatabase($notifiable)
@@ -72,15 +51,18 @@ class TopicReplied extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the array representation of the notification.
+     * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toArray($notifiable)
+    public function toMail($notifiable)
     {
-        return [
-            //
-        ];
+        $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
+
+        return (new MailMessage)
+            ->line('你的话题有新回复！')
+            ->action('查看回复', $url)
+            ->line('Thank you for using our application!');;
     }
 }

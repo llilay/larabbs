@@ -34,11 +34,9 @@ $api->version('v1', [
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')->name('api.socials.authorizations.store');
         // 登录
-        $api->post('authorizations', 'AuthorizationsController@store')
-            ->name('api.authorizations.store');
+        $api->post('authorizations', 'AuthorizationsController@store')->name('api.authorizations.store');
         // 刷新token
-        $api->put('authorizations/current', 'AuthorizationsController@update')
-            ->name('api.authorizations.update');
+        $api->put('authorizations/current', 'AuthorizationsController@update')->name('api.authorizations.update');
         // 删除token
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
@@ -52,10 +50,8 @@ $api->version('v1', [
         // 游客可以访问的接口
         $api->get('categories', 'CategoriesController@index')->name('api.categories.index');
         $api->get('topics', 'TopicsController@index')->name('api.topics.index');
-        $api->get('users/{user}/topics', 'TopicsController@userIndex')
-            ->name('api.users.topics.index');
-        $api->get('topics/{topic}', 'TopicsController@show')
-            ->name('api.topics.show');
+        $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');
+        $api->get('topics/{topic}', 'TopicsController@show')->name('api.topics.show');
 
         // 需要 token 验证的接口/登录用户才可以访问的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
@@ -70,17 +66,17 @@ $api->version('v1', [
             $api->patch('topics/{topic}', 'TopicsController@update')->name('api.topics.update');
             $api->delete('topics/{topic}', 'TopicsController@destroy')->name('api.topics.destroy');
             // 发布回复
-            $api->post('topics/{topic}/replies', 'RepliesController@store')
-                ->name('api.topics.replies.store');
+            $api->post('topics/{topic}/replies', 'RepliesController@store')->name('api.topics.replies.store');
             // 删除回复
-            $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')
-                ->name('api.topics.replies.destroy');
+            $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')->name('api.topics.replies.destroy');
             // 话题回复列表
-            $api->get('topics/{topic}/replies', 'RepliesController@index')
-                ->name('api.topics.replies.index');
+            $api->get('topics/{topic}/replies', 'RepliesController@index')->name('api.topics.replies.index');
             // 某个用户发布的回复列表
             $api->get('users/{user}/replies', 'RepliesController@userIndex')
                 ->name('api.users.replies.index');
+            // 通知列表
+            $api->get('user/notifications', 'NotificationsController@index')
+                ->name('api.user.notifications.index');
         });
     });
 });
