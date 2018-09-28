@@ -52,6 +52,9 @@ $api->version('v1', [
         $api->get('topics', 'TopicsController@index')->name('api.topics.index');
         $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');
         $api->get('topics/{topic}', 'TopicsController@show')->name('api.topics.show');
+        // 资源推荐
+        $api->get('links', 'LinksController@index')
+            ->name('api.links.index');
 
         // 需要 token 验证的接口/登录用户才可以访问的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
