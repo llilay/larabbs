@@ -52,6 +52,11 @@ $api->version('v1', [
         $api->get('topics', 'TopicsController@index')->name('api.topics.index');
         $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');
         $api->get('topics/{topic}', 'TopicsController@show')->name('api.topics.show');
+        // 话题回复列表
+        $api->get('topics/{topic}/replies', 'RepliesController@index')->name('api.topics.replies.index');
+        // 某个用户发布的回复列表
+        $api->get('users/{user}/replies', 'RepliesController@userIndex')
+            ->name('api.users.replies.index');
         // 资源推荐
         $api->get('links', 'LinksController@index')->name('api.links.index');
         // 活跃用户
@@ -74,11 +79,6 @@ $api->version('v1', [
             $api->post('topics/{topic}/replies', 'RepliesController@store')->name('api.topics.replies.store');
             // 删除回复
             $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')->name('api.topics.replies.destroy');
-            // 话题回复列表
-            $api->get('topics/{topic}/replies', 'RepliesController@index')->name('api.topics.replies.index');
-            // 某个用户发布的回复列表
-            $api->get('users/{user}/replies', 'RepliesController@userIndex')
-                ->name('api.users.replies.index');
             // 通知列表
             $api->get('user/notifications', 'NotificationsController@index')
                 ->name('api.user.notifications.index');
