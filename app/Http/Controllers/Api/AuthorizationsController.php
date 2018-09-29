@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Traits\PassportToken;
 use Zend\Diactoros\Response as Psr7Response;
 use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\AuthorizationServer;
@@ -14,6 +15,8 @@ use App\Http\Requests\Api\SocialAuthorizationRequest;
 
 class AuthorizationsController extends Controller
 {
+    use passportToken;
+
     // 手机号/邮箱登录
     /*public function store(AuthorizationRequest $request)
     {
@@ -109,8 +112,11 @@ class AuthorizationsController extends Controller
                 break;
         }
 
-        $token = Auth::guard('api')->fromUser($user);
-        return $this->respondWithToken($token)->setStatusCode(201);
+        //$token = Auth::guard('api')->fromUser($user);
+        //return $this->respondWithToken($token)->setStatusCode(201);
+
+        $result = $this->getBearerTokenByUser($user, '1', false);
+        return $this->response->array($result)->setStatusCode(201);
     }
 
     /*public function update()
